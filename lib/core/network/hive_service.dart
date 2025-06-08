@@ -36,4 +36,22 @@ class HiveService {
     var box = await Hive.openBox<BatchHiveModel>(HiveTableConstant.batchBox);
     await box.delete(id);
   }
+
+
+  //+++++++++++++++++++++Course Queries++++++++++++++++++++++++++
+  Future<void> addCourse(CourseHiveModel course) async {
+    var box = await Hive.openBox<CourseHiveModel>(HiveTableConstant.batchBox);
+    await box.put(course.courseId, course);
+  }
+
+  Future<List<CourseHiveModel>> getAllCourses() async {
+    var box = await Hive.openBox<CourseHiveModel>(HiveTableConstant.batchBox);
+    var batches = box.values.toList();
+    return batches;
+  }
+
+  Future<void> deleteCourse(String id) async {
+    var box = await Hive.openBox<CourseHiveModel>(HiveTableConstant.batchBox);
+    await box.delete(id);
+  }
 }
